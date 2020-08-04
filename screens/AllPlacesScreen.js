@@ -1,14 +1,29 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, { useLayoutEffect } from 'react';
+import { StyleSheet, Text, View, Platform } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import CustomHeaderButton from '../components/CustomHeaderButton';
 
-const AllPlacesScreen = () => {
-    return (
-        <View>
-            <Text></Text>
-        </View>
-    )
-}
+const AllPlacesScreen = ({ navigation }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="Add Place"
+            iconName={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
+          />
+        </HeaderButtons>
+      ),
+    });
+  });
 
-export default AllPlacesScreen
+  return (
+    <View>
+      <Text></Text>
+    </View>
+  );
+};
 
-const styles = StyleSheet.create({})
+export default AllPlacesScreen;
+
+const styles = StyleSheet.create({});

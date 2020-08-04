@@ -1,19 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AllPlacesScreen from './screens/AllPlacesScreen';
 import AddPlaceScreen from './screens/AddPlaceScreen';
 import PlaceDetailScreen from './screens/PlaceDetailScreen';
 import ViewMapScreen from './screens/ViewMapScreen';
+import Colors from './constants/Colors';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="All Places">
+      <Stack.Navigator
+        initialRouteName="All Places"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Platform.OS === 'ios' ? 'white' : Colors.primary,
+          },
+          headerTintColor: Platform.OS === 'ios' ? Colors.primary : 'white',
+        }}
+      >
         <Stack.Screen
           name="AllPlaces"
           component={AllPlacesScreen}
