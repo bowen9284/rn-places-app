@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import { StyleSheet, Text, View, Platform } from 'react-native';
+import { Text, View, Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 
@@ -11,11 +11,12 @@ const AllPlacesScreen = ({ navigation }) => {
           <Item
             title="Add Place"
             iconName={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}
+            onPress={() => navigation.navigate('AddPlace')}
           />
         </HeaderButtons>
       ),
     });
-  });
+  }, [navigation]);
 
   return (
     <View>
@@ -25,5 +26,3 @@ const AllPlacesScreen = ({ navigation }) => {
 };
 
 export default AllPlacesScreen;
-
-const styles = StyleSheet.create({});
