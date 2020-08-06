@@ -1,7 +1,9 @@
 import React, { useLayoutEffect } from 'react';
-import { Text, View, Platform } from 'react-native';
+import { Text, View, Platform, FlatList } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
+import { useSelector } from 'react-redux';
+import PlaceItem from '../components/PlaceItem';
 
 const AllPlacesScreen = ({ navigation }) => {
   useLayoutEffect(() => {
@@ -18,10 +20,26 @@ const AllPlacesScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
+  const places = useSelector((state) => state.places.places);
+
   return (
-    <View>
-      <Text></Text>
-    </View>
+    <FlatList
+      data={places}
+      keyExtractor={(item) => item.id}
+      renderItem={(itemData) => (
+        <PlaceItem
+          title={itemData.item.title}
+          address={null}
+          image={'www.url.com'}
+          onSelect={() =>
+            navigation.navigate('PlaceDetail', {
+              placeTitle: itemData.item.title,
+              placeId: itemData.item.id,
+            })
+          }
+        ></PlaceItem>
+      )}
+    />
   );
 };
 
