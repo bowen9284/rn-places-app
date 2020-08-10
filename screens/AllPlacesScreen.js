@@ -21,7 +21,6 @@ const AllPlacesScreen = ({ navigation }) => {
   }, [navigation]);
 
   const places = useSelector((state) => state.places.places);
-  console.log(places);
   return (
     <FlatList
       data={places}

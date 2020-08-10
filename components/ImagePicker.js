@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import * as ImagePicker from 'expo-image-picker';
+import * as ExpoImagePicker from 'expo-image-picker';
 import { StyleSheet, Button, Text, View, Image, Alert } from 'react-native';
 import Colors from '../constants/Colors';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
-const ImgPicker = (props) => {
-  const [image, setImage] = useState(null);
+const ImagePicker = ({ onImageTaken }) => {
+  const [image, setImage] = useState();
 
   const verifyPermissions = async () => {
     if (Constants.platform.ios) {
@@ -31,13 +31,14 @@ const ImgPicker = (props) => {
     if (!hasPermission) {
       return;
     }
-    const chosenImage = await ImagePicker.launchCameraAsync({
+    const chosenImage = await ExpoImagePicker.launchCameraAsync({
       allowsEditing: true,
       aspect: [16, 9],
       quality: 0.5,
     });
+
     setImage(chosenImage.uri);
-    props.onImageTaken(image);
+    onImageTaken(chosenImage.uri);
   };
 
   const imageContainer = !image ? (
@@ -59,8 +60,6 @@ const ImgPicker = (props) => {
   );
 };
 
-export default ImgPicker;
-
 const styles = StyleSheet.create({
   imagePicker: {
     alignItems: 'center',
@@ -79,3 +78,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export default ImagePicker;

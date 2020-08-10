@@ -14,8 +14,8 @@ import ImagePicker from '../components/ImagePicker';
 
 const AddPlaceScreen = (props) => {
   const [titleValue, setTitleValue] = useState('');
-  const [selectedImage, setSelectedImage] = useState();
-  
+  const [selectedImage, setSelectedImage] = useState('');
+
   const dispatch = useDispatch();
 
   const titleChangeHandler = (text) => {
@@ -28,6 +28,7 @@ const AddPlaceScreen = (props) => {
   };
 
   const imageTakenHandler = (imagePath) => {
+    console.log('addplace path', imagePath);
     setSelectedImage(imagePath);
   };
 
