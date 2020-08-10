@@ -21,7 +21,7 @@ const AllPlacesScreen = ({ navigation }) => {
   }, [navigation]);
 
   const places = useSelector((state) => state.places.places);
-
+  console.log(places);
   return (
     <FlatList
       data={places}
@@ -30,7 +30,7 @@ const AllPlacesScreen = ({ navigation }) => {
         <PlaceItem
           title={itemData.item.title}
           address={null}
-          image={'www.url.com'}
+          image={itemData.item.imageUri}
           onSelect={() =>
             navigation.navigate('PlaceDetail', {
               placeTitle: itemData.item.title,

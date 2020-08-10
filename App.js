@@ -11,6 +11,16 @@ import PlaceDetailScreen from './screens/PlaceDetailScreen';
 import ViewMapScreen from './screens/ViewMapScreen';
 import Colors from './constants/Colors';
 import placesReducer from './store/reducers/places-reducer';
+import { init } from './helpers/db';
+
+init()
+  .then(() => {
+    console.log('Initialized Database');
+  })
+  .catch((error) => {
+    console.log('Initializing Database failed.');
+    console.log(error);
+  });
 
 const Stack = createStackNavigator();
 
