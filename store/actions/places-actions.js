@@ -38,8 +38,7 @@ export const loadPlaces = () => {
   return async (dispatch) => {
     try {
       const result = await getAllPlaces();
-      console.log('db', result);
-
+      
       dispatch({
         type: SET_PLACES,
         places: result.rows._array,
