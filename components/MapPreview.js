@@ -1,6 +1,6 @@
 import React from 'react';
-import { ToucableOpacity, StyleSheet, Image, View } from 'react-native';
-import vars from '../env';
+import { TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { vars } from '../env';
 
 const MapPreview = (props) => {
   let imagePreviewUrl;
@@ -9,7 +9,7 @@ const MapPreview = (props) => {
     imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${props.location.lat},${props.location.long}&zoom=14&size=400x200&maptype=roadmap&markers=markers=color:red%7Clabel:A%7C${props.location.lat},${props.location.long}&key=${vars.googleApiKey}`;
   }
   return (
-    <View
+    <TouchableOpacity
       onPress={props.onPress}
       style={{ ...styles.mapPreview, ...props.style }}
     >
@@ -23,11 +23,9 @@ const MapPreview = (props) => {
       ) : (
         props.children
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
-
-export default MapPreview;
 
 const styles = StyleSheet.create({
   mapPreview: {
@@ -39,3 +37,5 @@ const styles = StyleSheet.create({
     height: '100%',
   },
 });
+
+export default MapPreview;

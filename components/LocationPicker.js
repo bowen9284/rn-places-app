@@ -8,7 +8,6 @@ import {
   Alert,
 } from 'react-native';
 import Colors from '../constants/Colors';
-import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import MapPreview from './MapPreview';
@@ -59,6 +58,7 @@ const LocationPicker = (props) => {
   const pickOnMapHandler = () => {
     props.navigation.navigate('ViewMap');
   };
+
   return (
     <View style={styles.locationPicker}>
       <MapPreview

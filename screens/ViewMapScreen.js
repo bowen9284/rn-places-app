@@ -4,7 +4,7 @@ import MapView from 'react-native-maps';
 
 const ViewMapScreen = (props) => {
   const mapRegion = {
-    latitute: 37.78,
+    latitude: 37.78,
     longitude: -122.43,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
@@ -15,4 +15,8 @@ const ViewMapScreen = (props) => {
 
 export default ViewMapScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    mapStyle: {
+        flex: 1
+    }
+});
