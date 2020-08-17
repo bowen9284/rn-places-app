@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -12,9 +12,17 @@ import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import MapPreview from './MapPreview';
 
-const LocationPicker = (props) => {
+const LocationPicker = ({ navigation, route }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [pickedLocation, setPickedLocation] = useState();
+
+  const selectedLocation = route.params?.selectedLocation;
+
+  useEffect(() => {
+    if (selectedLocation) {
+      setPickedLocation(selectedLocation);
+    }
+  }, [selectedLocation]);
 
   const verifyPermissions = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -56,7 +64,7 @@ const LocationPicker = (props) => {
   };
 
   const pickOnMapHandler = () => {
-    props.navigation.navigate('ViewMap');
+    navigation.navigate('ViewMap');
   };
 
   return (

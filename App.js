@@ -61,7 +61,9 @@ export default function App() {
           <Stack.Screen
             name="ViewMap"
             component={ViewMapScreen}
-            options={{ title: 'Map' }}
+            options={{
+              title: 'Map',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

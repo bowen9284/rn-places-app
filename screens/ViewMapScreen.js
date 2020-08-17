@@ -1,23 +1,55 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {
+  useState,
+  useLayoutEffect,
+  useEffect,
+  useCallback,
+} from 'react';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Platform,
+  Alert,
+} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import Colors from '../constants/Colors';
 
-const ViewMapScreen = (props) => {
+const ViewMapScreen = ({ navigation, route }) => {
   const [selectedLocation, setSelectedLocation] = useState();
 
-  const mapRegion = {
-    latitude: 37.78,
-    longitude: -122.43,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  };
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          style={styles.headerButton}
+          onPress={() => saveLocationHander()}
+        >
+          <Text style={styles.headerButtonText}>Save</Text>
+        </TouchableOpacity>
+      ),
+    });
+  });
+
+  const saveLocationHander = useCallback(() => {
+    if (!selectedLocation) {
+      Alert.alert('Oops!', 'Please select a location');
+      return;
+    }
+    navigation.navigate('AddPlace', { selectedLocation: selectedLocation });
+  }, [selectedLocation]);
 
   const selectLocationHandler = (event) => {
     setSelectedLocation({
       lat: event.nativeEvent.coordinate.latitude,
       long: event.nativeEvent.coordinate.longitude,
     });
+  };
+
+  const mapRegion = {
+    latitude: 37.78,
+    longitude: -122.43,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
   };
 
   let markerCoordinates;
@@ -42,10 +74,17 @@ const ViewMapScreen = (props) => {
   );
 };
 
-export default ViewMapScreen;
-
 const styles = StyleSheet.create({
   mapStyle: {
     flex: 1,
   },
+  headerButton: {
+    marginHorizontal: 20,
+  },
+  headerButtonText: {
+    fontSize: 16,
+    color: Platform.OS === 'ios' ? Colors.primary : 'white',
+  },
 });
+
+export default ViewMapScreen;
