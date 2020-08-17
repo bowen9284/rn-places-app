@@ -4,7 +4,7 @@ import { insertPlace, getAllPlaces } from '../../helpers/db';
 export const ADD_PLACE = 'ADD_PLACE';
 export const SET_PLACES = 'SET_PLACES';
 
-export const addplace = (title, image) => {
+export const addplace = (title, image, location) => {
   return async (dispatch) => {
     const fileName = image.split('/').pop();
     const newPath = FileSystem.documentDirectory + fileName;
@@ -19,13 +19,13 @@ export const addplace = (title, image) => {
         title,
         newPath,
         'placeholder address',
-        15.6,
-        12.3
+        location.lat,
+        location.long
       );
 
       dispatch({
         type: ADD_PLACE,
-        placeData: { id: result.insertId, title: title, image: image },
+        placeData: { id: result.insertId, title: title, image: image, location: location },
       });
     } catch (error) {
       console.log(error);
