@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useEffect } from 'react';
-import { Text, View, Platform, FlatList } from 'react-native';
+import { Platform, FlatList } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,7 +24,7 @@ const AllPlacesScreen = ({ navigation }) => {
   }, [navigation]);
 
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(placesActions.loadPlaces());
   }, [dispatch]);
@@ -36,7 +36,7 @@ const AllPlacesScreen = ({ navigation }) => {
       renderItem={(itemData) => (
         <PlaceItem
           title={itemData.item.title}
-          address={null}
+          address={itemData.item.address}
           image={itemData.item.imageUri}
           onSelect={() =>
             navigation.navigate('PlaceDetail', {
