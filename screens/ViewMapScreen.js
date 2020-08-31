@@ -15,9 +15,15 @@ import MapView, { Marker } from 'react-native-maps';
 import Colors from '../constants/Colors';
 
 const ViewMapScreen = ({ navigation, route }) => {
-  const [selectedLocation, setSelectedLocation] = useState();
+  const initialLocation = route.params?.initialLocation;
+  const readOnly = route.params?.readOnly;
+
+  const [selectedLocation, setSelectedLocation] = useState(initialLocation);
 
   useLayoutEffect(() => {
+    if (readOnly) {
+      return;
+    }
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity
@@ -39,6 +45,9 @@ const ViewMapScreen = ({ navigation, route }) => {
   }, [selectedLocation]);
 
   const selectLocationHandler = (event) => {
+    if (readOnly) {
+      return;
+    }
     setSelectedLocation({
       lat: event.nativeEvent.coordinate.latitude,
       long: event.nativeEvent.coordinate.longitude,
