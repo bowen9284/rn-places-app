@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useLayoutEffect,
-  useEffect,
-  useCallback,
-} from 'react';
+import React, { useState, useLayoutEffect, useCallback } from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -55,8 +50,8 @@ const ViewMapScreen = ({ navigation, route }) => {
   };
 
   const mapRegion = {
-    latitude: 37.78,
-    longitude: -122.43,
+    latitude: initialLocation ? initialLocation.lat : 37.78,
+    longitude: initialLocation ? initialLocation.long : -122.43,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };

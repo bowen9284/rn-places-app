@@ -21,8 +21,6 @@ export const addplace = (title, image, location) => {
     }
 
     const address = responseJson.results[0].formatted_address;
-    console.log(responseJson);
-
     const fileName = image.split('/').pop();
     const newPath = FileSystem.documentDirectory + fileName;
 
